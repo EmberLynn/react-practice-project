@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
 
 class App extends Component {
   state = {
     persons: [
-      { id: '1', name: 'John', age: 50},
-      { id: '2', name: 'Sherlock', age: 41},
+      { id: '1', name: 'John', age: 50 },
+      { id: '2', name: 'Sherlock', age: 41 },
       { id: '3', name: 'Mrs.H', age: 114 }
     ],
     showPersons: false
@@ -17,7 +17,7 @@ class App extends Component {
     //const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
 
   nameChangedHandler = (event, id) => {
@@ -26,9 +26,9 @@ class App extends Component {
     //p is the current element in the array
     //we return true or false depending if the element was or was not found
     const personIndex = this.state.persons.findIndex(p => {
-        //if the current element's id is the same as the id passed into the method, return true
-        //once returned true, personIndex will hold the position of the found element
-        return p.id === id;
+      //if the current element's id is the same as the id passed into the method, return true
+      //once returned true, personIndex will hold the position of the found element
+      return p.id === id;
     });
 
     //do not do this:
@@ -55,12 +55,12 @@ class App extends Component {
 
     //now that everything has been changed, let's set the state
     //persons in state will now equal this new persons array
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
 
-  togglePersonsHandler = () =>{
+  togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow})
+    this.setState({ showPersons: !doesShow })
   }
 
 
@@ -73,7 +73,7 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover':{
+      ':hover': {
         backgroundColor: 'lightgreen',
         color: 'black'
       }
@@ -84,12 +84,12 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <Person 
-            click={() => this.deletePersonHandler(index)}
-            name={person.name} 
-            age={person.age}
-            key={person.id}
-            changed={(event) => this.nameChangedHandler(event, person.id)}/>
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       );
@@ -101,22 +101,24 @@ class App extends Component {
     }
 
     let classes = [];
-    if(this.state.persons.length <= 2){
+    if (this.state.persons.length <= 2) {
       classes.push('red');
     }
-    if(this.state.persons.length <= 1){
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
 
     return (
-      <div className="App">
-        <h1>Hello World!</h1>
-        <p className={classes.join(' ')}>This is a React App</p>
-        <button 
-        style = {style}
-        onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hello World!</h1>
+          <p className={classes.join(' ')}>This is a React App</p>
+          <button
+            style={style}
+            onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
+        </div>
+      </StyleRoot>
     );
   }
 }
