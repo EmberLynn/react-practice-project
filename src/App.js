@@ -5,14 +5,15 @@ import styled from 'styled-components';
 import Person from './Person/Person';
 
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red' : 'green'};
   color: white;
   font: inherit;
   border: 1px solid blue;
   padding: 8px;
   cursor: pointer;
+
   &:hover {
-    background-color: lightgreen;
+    background-color: ${props => props.alt ? 'pink' : 'lightgreen'};
     color: black;
   }
 `;
@@ -127,7 +128,8 @@ class App extends Component {
         <div className="App">
           <h1>Hello World!</h1>
           <p className={classes.join(' ')}>This is a React App</p>
-          <StyledButton onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+          <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons
+          </StyledButton>
           {/* <button
             style={style}
             onClick={this.togglePersonsHandler}>Toggle Persons</button> */}
