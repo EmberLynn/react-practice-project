@@ -1,7 +1,5 @@
-import React from 'react';
-//import Radium from 'radium';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-//import './Person.css';
 
 const StyledDiv = styled.div`
     width: 40%;
@@ -16,21 +14,44 @@ const StyledDiv = styled.div`
     }
 `
 
-const person = (props) => {
-    // const style = {
-    //     '@media (min-width: 500px)' : {
-    //         width: '450px'
-    //     }
-    // };
-    return (
-        //<div className = "Person" style={style}>
-        <StyledDiv>
-            <p onClick={props.click}>I'm a {props.name} and I am {props.age} years old! {props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name}/>
-        </StyledDiv>
-        //</div>
-    )
+class Person extends Component {
+
+    //runs in this order
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[Persons.js] getDerivedStateFromProps');
+        return state;
+    }
+
+    //must return true or false for whether or not component should update
+    //compair current to past to see if there was a change
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('[Persons.js] shouldComponentUpdate');
+        return true;
+    }
+
+    //can save something in state and give it to componentDidUpdate
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log('[Persons.js] getSnapshotBeforeUpdate')
+        return {message: 'Snapshot!'};
+    }
+
+    //happens after render
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot)
+    }
+
+    render(){
+        console.log('[Person.js] rendering...');
+        return (
+            <StyledDiv>
+                <p onClick={this.props.click}>I'm a {this.props.name} and I am {this.props.age} years old! {this.props.children}</p>
+                <input type="text" onChange={this.props.changed} value={this.props.name}/>
+            </StyledDiv>
+        )
+    }
+    
 }
 
-//export default Radium(person);
-export default person;
+export default Person;
