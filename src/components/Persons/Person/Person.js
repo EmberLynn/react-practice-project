@@ -16,32 +16,6 @@ const StyledDiv = styled.div`
 
 class Person extends Component {
 
-    //runs in this order
-
-    static getDerivedStateFromProps(props, state) {
-        console.log('[Persons.js] getDerivedStateFromProps');
-        return state;
-    }
-
-    //must return true or false for whether or not component should update
-    //compair current to past to see if there was a change
-    shouldComponentUpdate(nextProps, nextState){
-        console.log('[Persons.js] shouldComponentUpdate');
-        return true;
-    }
-
-    //can save something in state and give it to componentDidUpdate
-    getSnapshotBeforeUpdate(prevProps, prevState){
-        console.log('[Persons.js] getSnapshotBeforeUpdate')
-        return {message: 'Snapshot!'};
-    }
-
-    //happens after render
-    componentDidUpdate(prevProps, prevState, snapshot){
-        console.log('[Persons.js] componentDidUpdate');
-        console.log(snapshot)
-    }
-
     render(){
         console.log('[Person.js] rendering...');
         return (
